@@ -40,7 +40,7 @@ then add some data by passing hash
 .data({:id => 12})                  
 ```
 
-```json
+```ruby
 # {
 #     ...
 #     'data': {'id': 12}
