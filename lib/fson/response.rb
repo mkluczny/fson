@@ -23,7 +23,7 @@ module Fson
     end
 
     def as_json
-      ::Oj.dump(build)
+      ::Oj.dump(build, :mode => :compat)
     end
 
     class << self

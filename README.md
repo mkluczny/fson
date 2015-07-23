@@ -16,31 +16,52 @@ Add this line to your application's Gemfile:
 
 Create response builder
 
-    Fson::Response.new() # {}
+    Fson::Response.new()            # {}
     
 with given status
 
-    Fson::Response.new('failure').as_json # {'status': 'failure'}
+    Fson::Response.new('failure')   # {'status': 'failure'}
     
 or use one of predefined factory methods
 
-    Fson::Response.success  # {'status': 'success'}
-    Fson::Response.error    # {'status': 'error'}
-    Fson::Response.fail     # {'status': 'fail'}
+    Fson::Response.success          # {'status': 'success'}
+    Fson::Response.error            # {'status': 'error'}
+    Fson::Response.fail             # {'status': 'fail'}
     
 then add some data by passing hash
 
-    Fson::Response.success.data({:id => 12}) # {'status': 'success', 'data': {'id': 12}}
+    .data({:id => 12})              # { ... 'data': {'id': 12}}
     
 or defining block
 
-    Fson::Response.success.data {|data| data[:id] => 12} # {'status': 'success', 'data': {'id': 12}}
+    .data {|data| data[:id] = 12}   # { ... 'data': {'id': 12}}
     
 optionally add errors
 
-    Fson::Response.fail.error('not authorized', 401) # {'status': 'fail', 'errors': [{'message': 'not authorized', 'id': 401}]}
+    .error('not authorized', 401)   # { ... 'errors': [{'message': 'not authorized', 'id': 401}]}
     
 and finally get JSON with
     
-    as_json
+    .as_json
+    
+## Example
+
+Builder chain
+
+    Fson::Response.fail.data {|data| data[:id] = 12}.error('not authorized', 401).as_json
+    
+will return
+    
+    {
+        "status": "fail", 
+        "data": {
+            "id": 12
+        },
+        "errors": [
+            {
+                "message": "not authorized", 
+                "id": 401
+            }
+        ]
+    }"
     
