@@ -40,9 +40,13 @@ then add some data by passing hash
 .data({:id => 12})                  
 ```
 
-    {
-        'data': {'id': 12}
-    }
+```json
+{
+    ...
+    'data': {'id': 12}
+    ...
+}
+```
     
 or defining block
 
@@ -52,32 +56,40 @@ or defining block
 }                                   
 ```
 
-    {
-        'data': {
-            'id': 12
-        }
+```json
+{
+    ...
+    'data': {
+        'id': 12
     }
+    ...
+}
+```
     
 optionally add errors
 
 ```ruby
-    .error('not authorized') { |error| 
-        error[:code] = 401
-    }
-    .error('null pointer exception')
+.error('not authorized') { |error| 
+error[:code] = 401
+}
+.error('null pointer exception')
 ```
 
-    { 
-        'errors': [
-            {
-                'message': 'not authorized',
-                 'code': 401
-            },
-            {
-                'message': 'null pointer exception'
-            }
-        ]
-    }
+```json
+{ 
+    ...
+    'errors': [
+        {
+            'message': 'not authorized',
+             'code': 401
+        },
+        {
+            'message': 'null pointer exception'
+        }
+    ]
+    ...
+}
+```
     
 and finally get JSON with
 
