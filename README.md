@@ -94,16 +94,18 @@ Fson::Response.fail.data {|data| data[:id] = 12}.error('not authorized').as_json
 ```
     
 will return
-    
-    {
-        "status": "fail", 
-        "data": {
-            "id": 12
-        },
-        "errors": [
-            {
-                "message": "not authorized"
-            }
-        ]
-    }"
+
+```json
+{
+    "status": "fail", 
+    "data": {
+        "id": 12
+    },
+    "errors": [
+        {
+            "message": "not authorized"
+        }
+    ]
+}
+```    
     
