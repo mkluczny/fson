@@ -44,8 +44,8 @@ then add some data by passing hash
 # {
 #     ...
 #     'data': {
-            'id': 12
-       }
+#           'id': 12
+#      }
 #     ...
 # }
 ```
