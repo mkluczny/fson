@@ -43,7 +43,9 @@ then add some data by passing hash
 ```ruby
 # {
 #     ...
-#     'data': {'id': 12}
+#     'data': {
+            'id': 12
+       }
 #     ...
 # }
 ```
