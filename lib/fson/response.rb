@@ -20,7 +20,7 @@ module Fson
       @_errors   = []
     end
 
-    def to_json
+    def as_json
       ::Oj.dump(build)
     end
 
