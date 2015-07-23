@@ -1,8 +1,7 @@
 PATH
   remote: .
   specs:
-    fson (0.0.1)
-      oj (~> 2.12)
+    fson (0.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -29,5 +28,6 @@ PLATFORMS
 
 DEPENDENCIES
   fson!
+  oj (~> 2.12.10)
   rake (~> 10.4)
-  rspec
+  rspec (~> 3.3)

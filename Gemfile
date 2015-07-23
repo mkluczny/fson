@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'rspec'
+gem 'oj', '~> 2.12.10'
