@@ -12,12 +12,14 @@ module Fson
     # Constructor
     ##
 
-    def initialize(status)
-      @_response = {
-          :status => status
-      }
+    def initialize(status = nil)
+      @_response = {}
       @_data     = {}
       @_errors   = []
+
+      unless status.nil?
+        @_response[:status] = status
+      end
     end
 
     def as_json
