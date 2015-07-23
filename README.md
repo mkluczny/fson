@@ -16,52 +16,109 @@ Add this line to your application's Gemfile:
 
 Create response builder
 
-    Fson::Response.new()            # {}
+```ruby
+Fson::Response.new()                # {}
+```
     
 with given status
 
-    Fson::Response.new('failure')   # {'status': 'failure'}
+```ruby
+Fson::Response.new('failure')       # {'status': 'failure'}
+```
     
 or use one of predefined factory methods
 
-    Fson::Response.success          # {'status': 'success'}
-    Fson::Response.error            # {'status': 'error'}
-    Fson::Response.fail             # {'status': 'fail'}
+```ruby
+Fson::Response.success              # {'status': 'success'}
+Fson::Response.error                # {'status': 'error'}
+Fson::Response.fail                 # {'status': 'fail'}
+```
     
 then add some data by passing hash
 
-    .data({:id => 12})              # { ... 'data': {'id': 12}}
+```ruby
+.data({:id => 12})                  
+```
+
+```ruby
+# {
+#     ...
+#     'data': {
+#           'id': 12
+#      }
+#     ...
+# }
+```
     
 or defining block
 
-    .data {|data| data[:id] = 12}   # { ... 'data': {'id': 12}}
+```ruby
+.data { |data|
+    data[:id] = 12
+}                                   
+```
+
+```ruby
+# {
+#     ...
+#     'data': {
+#         'id': 12
+#     }
+#     ...
+# }
+```
     
 optionally add errors
 
-    .error('not authorized', 401)   # { ... 'errors': [{'message': 'not authorized', 'id': 401}]}
+```ruby
+.error('not authorized') { |e| 
+    e[:code] = 401
+}.error('null pointer exception')
+```
+
+```ruby
+# { 
+#     ...
+#     'errors': [
+#         {
+#             'message': 'not authorized',
+#              'code': 401
+#         },
+#         {
+#             'message': 'null pointer exception'
+#         }
+#     ]
+#     ...
+# }
+```
     
 and finally get JSON with
-    
-    .as_json
+
+```ruby
+.as_json
+```
     
 ## Example
 
 Builder chain
 
-    Fson::Response.fail.data {|data| data[:id] = 12}.error('not authorized', 401).as_json
+```ruby
+Fson::Response.fail.data {|data| data[:id] = 12}.error('not authorized').as_json
+```
     
 will return
-    
-    {
-        "status": "fail", 
-        "data": {
-            "id": 12
-        },
-        "errors": [
-            {
-                "message": "not authorized", 
-                "id": 401
-            }
-        ]
-    }"
+
+```json
+{
+    "status": "fail", 
+    "data": {
+        "id": 12
+    },
+    "errors": [
+        {
+            "message": "not authorized"
+        }
+    ]
+}
+```    
     

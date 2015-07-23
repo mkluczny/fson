@@ -15,12 +15,13 @@ module Fson
       self
     end
 
-    def error(message, id = nil)
-      @_errors << { :message => message }.tap {|error|
-        unless id.nil?
-          error[:id] = id
-        end
-      }
+    def error(message, &block)
+      error = { :message => message }
+
+      yield(error) if block_given?
+
+      @_errors << error
+
       self
     end
   end
