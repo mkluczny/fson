@@ -1,5 +1,5 @@
 module Fson
-  module Builder
+  module Fson::Builder
 
     def data(data = nil, &block)
       if data
@@ -17,7 +17,7 @@ module Fson
 
     def error(message, id = nil)
       @_errors << { :message => message }.tap {|error|
-        if id.present?
+        unless id.nil?
           error[:id] = id
         end
       }

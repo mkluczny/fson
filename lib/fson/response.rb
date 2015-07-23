@@ -1,4 +1,9 @@
+require 'oj'
+
 module Fson
+
+  require_relative 'builder'
+
   class Response
 
     include ::Fson::Builder
@@ -15,8 +20,8 @@ module Fson
       @_errors   = []
     end
 
-    def to_json(options = nil)
-      @_response.to_json(options)
+    def to_json
+      ::Oj.dump(build)
     end
 
     class << self
@@ -46,7 +51,7 @@ module Fson
 
     def build
       unless @_data.empty?
-        @_response[:body] = @_data
+        @_response[:data] = @_data
       end
 
       unless @_errors.empty?
