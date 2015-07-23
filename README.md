@@ -72,9 +72,8 @@ optionally add errors
 
 ```ruby
 .error('not authorized') { |error| 
-error[:code] = 401
-}
-.error('null pointer exception')
+    error[:code] = 401
+}.error('null pointer exception')
 ```
 
 ```ruby
