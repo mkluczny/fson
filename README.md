@@ -23,15 +23,15 @@ Fson::Response.new()                # {}
 with given status
 
 ```ruby
-Fson::Response.new('failure')       # {'status': 'failure'}
+Fson::Response.new('failure')       # {"status": "failure"}
 ```
     
 or use one of predefined factory methods
 
 ```ruby
-Fson::Response.success              # {'status': 'success'}
-Fson::Response.error                # {'status': 'error'}
-Fson::Response.fail                 # {'status': 'fail'}
+Fson::Response.success              # {"status": "success"}
+Fson::Response.error                # {"status": "error"}
+Fson::Response.fail                 # {"status": "fail"}
 ```
     
 then add some data by passing hash
@@ -42,8 +42,8 @@ then add some data by passing hash
 
 ```json
 {
-    'data': {
-          'id': 12
+    "data": {
+          "id": 12
      }
 }
 ```
@@ -58,8 +58,8 @@ or defining block
 
 ```json
 {
-    'data': {
-        'id': 12
+    "data": {
+        "id": 12
     }
 }
 ```
@@ -74,13 +74,13 @@ optionally add errors
 
 ```json
 { 
-    'errors': [
+    "errors": [
         {
-            'message': 'not authorized',
-             'code': 401
+            "message": "not authorized",
+            "code": 401
         },
         {
-            'message': 'null pointer exception'
+            "message": "null pointer exception"
         }
     ]
 }
