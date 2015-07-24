@@ -58,14 +58,14 @@ or defining block
 }                                   
 ```
 
-```ruby
-# {
-#     ...
-#     'data': {
-#         'id': 12
-#     }
-#     ...
-# }
+```json
+{
+    // ...
+    'data': {
+        'id': 12
+    }
+    // ...
+}
 ```
     
 optionally add errors
@@ -76,20 +76,20 @@ optionally add errors
 }.error('null pointer exception')
 ```
 
-```ruby
-# { 
-#     ...
-#     'errors': [
-#         {
-#             'message': 'not authorized',
-#              'code': 401
-#         },
-#         {
-#             'message': 'null pointer exception'
-#         }
-#     ]
-#     ...
-# }
+```json
+{ 
+    // ...
+    'errors': [
+        {
+            'message': 'not authorized',
+             'code': 401
+        },
+        {
+            'message': 'null pointer exception'
+        }
+    ]
+    // ...
+}
 ```
     
 and finally get JSON with
