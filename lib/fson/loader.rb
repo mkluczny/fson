@@ -4,7 +4,7 @@ module Fson
   module Loader
     def self.configure(classes)
       classes.each { |clazz|
-        Fson::Response.class.send(:include, clazz)
+        Fson::Response.send(:include, clazz)
       }
     end
   end
