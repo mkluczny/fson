@@ -42,11 +42,9 @@ then add some data by passing hash
 
 ```json
 {
-    // ...
     'data': {
           'id': 12
      }
-    // ...
 }
 ```
     
@@ -60,11 +58,9 @@ or defining block
 
 ```json
 {
-    // ...
     'data': {
         'id': 12
     }
-    // ...
 }
 ```
     
@@ -78,7 +74,6 @@ optionally add errors
 
 ```json
 { 
-    // ...
     'errors': [
         {
             'message': 'not authorized',
@@ -88,7 +83,6 @@ optionally add errors
             'message': 'null pointer exception'
         }
     ]
-    // ...
 }
 ```
     
