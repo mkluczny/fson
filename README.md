@@ -11,6 +11,10 @@ Fson is a fluent builder for simple JSON API responses
 Add this line to your application's Gemfile:
 
     gem 'fson'
+
+for Rails projects also
+ 
+    rails g fson:install
     
 ## Usage
 
@@ -115,6 +119,36 @@ will return
     ]
 }
 ```    
+
+## Custom builders
+
+You can add custom builder methods operating on response hash objects
+
+```ruby
+@_response      # top level response hash
+@_data          # data hash
+@_errors        # errors hash
+```
+
+For example you can add builder
+
+```ruby
+module MyCustomBuilder
+    
+    def attribute(value)
+        @_data[:attribute] = value
+        self
+    end
+end
+```
+
+by registering it in initializer
+ 
+```ruby
+require 'fson/loader'
+
+::Fson::Loader::configure([MyCustomBuilder])
+```
     
 ## Contributing
 
