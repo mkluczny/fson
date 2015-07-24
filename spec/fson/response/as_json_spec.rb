@@ -7,7 +7,7 @@ describe ::Fson::Response do
     it 'should return json response' do
       # given
       response = ::Fson::Response.error
-                     .error('invalid', 'text-set-1')
+                     .error('invalid') { |e| e[:id] = 'text-set-1'}
                      .data { |data| data[:author] = 'Mateusz Kluczny' }
 
       # when/then

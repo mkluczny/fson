@@ -1,6 +1,6 @@
 ## Description
 
-Fson is a simple fluent builder for JSON API responses
+Fson is a fluent builder for simple JSON API responses
 
 [![Build Status](https://travis-ci.org/mkluczny/fson.svg?branch=develop)](https://travis-ci.org/mkluczny/fson)
 [![Dependency Status](https://gemnasium.com/mkluczny/fson.svg)](https://gemnasium.com/mkluczny/fson)
@@ -11,6 +11,10 @@ Fson is a simple fluent builder for JSON API responses
 Add this line to your application's Gemfile:
 
     gem 'fson'
+
+for Rails projects also
+ 
+    rails g fson:install
     
 ## Usage
 
@@ -23,15 +27,15 @@ Fson::Response.new()                # {}
 with given status
 
 ```ruby
-Fson::Response.new('failure')       # {'status': 'failure'}
+Fson::Response.new('failure')       # {"status": "failure"}
 ```
     
 or use one of predefined factory methods
 
 ```ruby
-Fson::Response.success              # {'status': 'success'}
-Fson::Response.error                # {'status': 'error'}
-Fson::Response.fail                 # {'status': 'fail'}
+Fson::Response.success              # {"status": "success"}
+Fson::Response.error                # {"status": "error"}
+Fson::Response.fail                 # {"status": "fail"}
 ```
     
 then add some data by passing hash
@@ -40,14 +44,12 @@ then add some data by passing hash
 .data({:id => 12})                  
 ```
 
-```ruby
-# {
-#     ...
-#     'data': {
-#           'id': 12
-#      }
-#     ...
-# }
+```json
+{
+    "data": {
+          "id": 12
+     }
+}
 ```
     
 or defining block
@@ -58,14 +60,12 @@ or defining block
 }                                   
 ```
 
-```ruby
-# {
-#     ...
-#     'data': {
-#         'id': 12
-#     }
-#     ...
-# }
+```json
+{
+    "data": {
+        "id": 12
+    }
+}
 ```
     
 optionally add errors
@@ -76,20 +76,18 @@ optionally add errors
 }.error('null pointer exception')
 ```
 
-```ruby
-# { 
-#     ...
-#     'errors': [
-#         {
-#             'message': 'not authorized',
-#              'code': 401
-#         },
-#         {
-#             'message': 'null pointer exception'
-#         }
-#     ]
-#     ...
-# }
+```json
+{ 
+    "errors": [
+        {
+            "message": "not authorized",
+            "code": 401
+        },
+        {
+            "message": "null pointer exception"
+        }
+    ]
+}
 ```
     
 and finally get JSON with
@@ -121,4 +119,41 @@ will return
     ]
 }
 ```    
+
+## Custom builders
+
+You can add custom builder methods operating on response hash objects
+
+```ruby
+@_response      # top level response hash
+@_data          # data hash
+@_errors        # errors hash
+```
+
+For example you can add builder
+
+```ruby
+module MyCustomBuilder
     
+    def attribute(value)
+        @_data[:attribute] = value
+        self
+    end
+end
+```
+
+by registering it in initializer
+ 
+```ruby
+require 'fson/loader'
+
+::Fson::Loader::configure([MyCustomBuilder])
+```
+    
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
