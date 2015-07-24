@@ -1,5 +1,5 @@
 module Fson
-  module Fson::Builder
+  module Builder
 
     def data(data = nil, &block)
       if data
