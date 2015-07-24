@@ -7,7 +7,7 @@ module Fson
       end
 
       def create_initializer
-        template 'initializer.rb', File.join('config', 'initializers', 'fson2.rb')
+        template 'initializer.rb', File.join('config', 'initializers', 'fson.rb')
       end
     end
   end
