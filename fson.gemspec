@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = 'fson'
   s.version     = Fson::VERSION
 
-  s.summary     = 'Simple fluent builder for API JSON responses'
+  s.summary     = 'Fluent builder for API JSON responses'
   s.description = 'Building simple JSON responses with fluent builder'
 
   s.authors     = ['Mateusz Kluczny']
