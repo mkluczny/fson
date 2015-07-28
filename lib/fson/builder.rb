@@ -15,7 +15,7 @@ module Fson
       self
     end
 
-    def error(message, &block)
+    def add_error(message, &block)
       error = { :message => message }
 
       yield(error) if block_given?
@@ -23,6 +23,22 @@ module Fson
       @_errors << error
 
       self
+    end
+
+    ##
+    # Status setters
+    ##
+
+    def error
+      status('error')
+    end
+
+    def success
+      status('success')
+    end
+
+    def fail
+      status('fail')
     end
   end
 end
