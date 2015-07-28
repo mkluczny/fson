@@ -14,7 +14,7 @@ module Fson
 
     def initialize(status = nil)
       @_response = {}
-      @_data     = []
+      @_data     = nil
       @_errors   = []
 
       unless status.nil?
@@ -52,7 +52,7 @@ module Fson
     private
 
     def build
-      unless @_data.empty?
+      unless @_data.nil?
         @_response[:data] = @_data
       end
 
