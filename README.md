@@ -42,7 +42,7 @@ Fson::Response.fail                 # {"status": "fail"}
 then add some data by passing hash
 
 ```ruby
-.data({:id => 12})                  
+.data([{:id => 12}])                  
 ```
 
 ```json
@@ -57,7 +57,7 @@ or defining block
 
 ```ruby
 .data { |data|
-    data[:id] = 12
+    data << {:id => 12}
 }                                   
 ```
 
@@ -102,7 +102,7 @@ and finally get JSON with
 Builder chain
 
 ```ruby
-Fson::Response.fail.data {|data| data[:id] = 12}.add_error('not authorized').as_json
+Fson::Response.fail.data {|data| data << {:id => 12}}.add_error('not authorized').as_json
 ```
     
 will return
@@ -110,9 +110,9 @@ will return
 ```json
 {
     "status": "fail", 
-    "data": {
+    "data": [{
         "id": 12
-    },
+    }],
     "errors": [
         {
             "message": "not authorized"

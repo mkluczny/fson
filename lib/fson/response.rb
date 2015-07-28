@@ -14,7 +14,7 @@ module Fson
 
     def initialize(status = nil)
       @_response = {}
-      @_data     = {}
+      @_data     = []
       @_errors   = []
 
       unless status.nil?
