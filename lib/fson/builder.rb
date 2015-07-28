@@ -1,6 +1,10 @@
 module Fson
   module Builder
 
+    ##
+    # Builder Methods
+    ##
+
     def data(data = nil, &block)
       if data
         @_data = data
@@ -26,19 +30,19 @@ module Fson
     end
 
     ##
-    # Status setters
+    # Status Setters
     ##
 
     def error
-      status('error')
+      status(:error)
     end
 
     def success
-      status('success')
+      status(:success)
     end
 
     def fail
-      status('fail')
+      status(:fail)
     end
   end
 end

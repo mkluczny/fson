@@ -72,9 +72,9 @@ or defining block
 optionally add errors
 
 ```ruby
-.error('not authorized') { |e| 
+.add_error('not authorized') { |e| 
     e[:code] = 401
-}.error('null pointer exception')
+}.add_error('null pointer exception')
 ```
 
 ```json
@@ -102,7 +102,7 @@ and finally get JSON with
 Builder chain
 
 ```ruby
-Fson::Response.fail.data {|data| data[:id] = 12}.error('not authorized').as_json
+Fson::Response.fail.data {|data| data[:id] = 12}.add_error('not authorized').as_json
 ```
     
 will return
@@ -120,6 +120,18 @@ will return
     ]
 }
 ```    
+
+## More builder methods
+
+```ruby
+.success()          # sets status to :success
+.error()            # sets status to :error
+.fail()             # sets status to :fail
+
+.status('failure')  # sets status
+```
+
+
 
 ## Custom builders
 
