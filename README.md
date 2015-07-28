@@ -5,6 +5,7 @@ Fson is a fluent builder for simple JSON API responses
 [![Build Status](https://travis-ci.org/mkluczny/fson.svg?branch=develop)](https://travis-ci.org/mkluczny/fson)
 [![Dependency Status](https://gemnasium.com/mkluczny/fson.svg)](https://gemnasium.com/mkluczny/fson)
 [![Code Climate](https://codeclimate.com/github/mkluczny/fson/badges/gpa.svg)](https://codeclimate.com/github/mkluczny/fson)
+[![Test Coverage](https://codeclimate.com/github/mkluczny/fson/badges/coverage.svg)](https://codeclimate.com/github/mkluczny/fson/coverage)
 
 ## Installation
 
@@ -71,9 +72,9 @@ or defining block
 optionally add errors
 
 ```ruby
-.error('not authorized') { |e| 
+.add_error('not authorized') { |e| 
     e[:code] = 401
-}.error('null pointer exception')
+}.add_error('null pointer exception')
 ```
 
 ```json
@@ -101,7 +102,7 @@ and finally get JSON with
 Builder chain
 
 ```ruby
-Fson::Response.fail.data {|data| data[:id] = 12}.error('not authorized').as_json
+Fson::Response.fail.data {|data| data[:id] = 12}.add_error('not authorized').as_json
 ```
     
 will return
@@ -119,6 +120,18 @@ will return
     ]
 }
 ```    
+
+## More builder methods
+
+```ruby
+.success()          # sets status to :success
+.error()            # sets status to :error
+.fail()             # sets status to :fail
+
+.status('failure')  # sets status
+```
+
+
 
 ## Custom builders
 

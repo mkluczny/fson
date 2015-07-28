@@ -1,6 +1,10 @@
 module Fson
   module Builder
 
+    ##
+    # Builder Methods
+    ##
+
     def data(data = nil, &block)
       if data
         @_data = data
@@ -15,7 +19,7 @@ module Fson
       self
     end
 
-    def error(message, &block)
+    def add_error(message, &block)
       error = { :message => message }
 
       yield(error) if block_given?
@@ -23,6 +27,22 @@ module Fson
       @_errors << error
 
       self
+    end
+
+    ##
+    # Status Setters
+    ##
+
+    def error
+      status(:error)
+    end
+
+    def success
+      status(:success)
+    end
+
+    def fail
+      status(:fail)
     end
   end
 end
