@@ -6,7 +6,9 @@ module Fson
     ##
 
     def data(data = nil, &block)
-      if data
+      @_data = []
+
+      if data and data.is_a?(Array)
         @_data = data
       end
 
