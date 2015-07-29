@@ -1,3 +1,5 @@
 require 'fson/loader'
 
-::Fson::Loader::configure([])
+ActionDispatch::Callbacks.to_prepare do
+  ::Fson::Loader::configure([])
+end

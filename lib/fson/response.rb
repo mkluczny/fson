@@ -22,8 +22,16 @@ module Fson
       end
     end
 
+    def as_json
+      ::Oj.dump(build, :mode => :compat)
+    end
+
+    ##
+    # Getters
+    ##
+
     def _data
-      (@_data ||= [])
+      @_data
     end
 
     def _response
@@ -34,9 +42,9 @@ module Fson
       @_errors
     end
 
-    def as_json
-      ::Oj.dump(build, :mode => :compat)
-    end
+    ##
+    # Static
+    ##
 
     class << self
 
