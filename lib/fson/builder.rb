@@ -6,18 +6,18 @@ module Fson
     ##
 
     def data(data = nil, &block)
-      @_data = []
+      _initialized_data_array
 
       if data and data.is_a?(Array)
         @_data = data
       end
 
-      yield(@_data) if block_given?
+      yield(_initialized_data_array()) if block_given?
       self
     end
 
     def status(status)
-      @_response[:status] = status
+      _response[:status] = status
       self
     end
 
@@ -26,8 +26,7 @@ module Fson
 
       yield(error) if block_given?
 
-      @_errors << error
-
+      _errors.push(error)
       self
     end
 
@@ -45,6 +44,28 @@ module Fson
 
     def fail
       status(:fail)
+    end
+
+    ##
+    # Private
+    ##
+
+    private
+
+    def _data
+      @_data
+    end
+
+    def _response
+      @_response
+    end
+
+    def _errors
+      @_errors
+    end
+
+    def _initialized_data_array
+      @_data ||= []
     end
   end
 end

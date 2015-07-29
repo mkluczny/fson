@@ -27,22 +27,6 @@ module Fson
     end
 
     ##
-    # Getters
-    ##
-
-    def _data
-      @_data
-    end
-
-    def _response
-      @_response
-    end
-
-    def _errors
-      @_errors
-    end
-
-    ##
     # Static
     ##
 
