@@ -135,12 +135,12 @@ will return
 
 ## Custom builders
 
-You can add custom builder methods operating on response hash objects
+You can add custom builder methods operating on response hash objects returned by getter methods
 
 ```ruby
-@_response      # top level response hash
-@_data          # data hash
-@_errors        # errors hash
+_response      # top level response hash
+_data          # data hash
+_errors        # errors hash
 ```
 
 For example you can add builder
@@ -149,7 +149,9 @@ For example you can add builder
 module MyCustomBuilder
     
     def attribute(value)
-        @_data[:attribute] = value
+        _data << {
+            :attribute => 'value'
+        }
         self
     end
 end
