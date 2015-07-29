@@ -163,7 +163,9 @@ by registering it in initializer
 ```ruby
 require 'fson/loader'
 
-::Fson::Loader::configure([MyCustomBuilder])
+ActionDispatch::Callbacks.to_prepare do
+  ::Fson::Loader::configure([MyCustomBuilder])
+end
 ```
     
 ## Contributing
