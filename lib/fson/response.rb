@@ -22,21 +22,13 @@ module Fson
       end
     end
 
-    def _data
-      (@_data ||= [])
-    end
-
-    def _response
-      @_response
-    end
-
-    def _errors
-      @_errors
-    end
-
     def as_json
       ::Oj.dump(build, :mode => :compat)
     end
+
+    ##
+    # Static
+    ##
 
     class << self
 
