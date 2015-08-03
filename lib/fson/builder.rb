@@ -50,13 +50,14 @@ module Fson
     private
 
     def data(data = nil, type = nil, &block)
+      self.send("_initialized_data_#{type.to_s.downcase}")
 
       if data
         raise 'Invalid Argument Error' unless data.is_a?(type)
         @_data = data
       end
 
-      yield(self.send("_initialized_data_#{type.to_s.downcase}")) if block_given?
+      yield(@_data) if block_given?
       self
     end
 
