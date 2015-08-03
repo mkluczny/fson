@@ -39,10 +39,22 @@ Fson::Response.error                # {"status": "error"}
 Fson::Response.fail                 # {"status": "fail"}
 ```
     
-then add some data by passing hash
+then add some data explicitly 
 
 ```ruby
-.data([{:id => 12}])                  
+.data_array([{:id => 12}])                  
+```
+
+```json
+{
+    "data": [{
+          "id": 12
+     }]
+}
+```
+
+```ruby
+.data_hash({:id => 12})
 ```
 
 ```json
@@ -52,12 +64,27 @@ then add some data by passing hash
      }
 }
 ```
+
     
-or defining block
+or by defining block
 
 ```ruby
-.data { |data|
+.data_array { |data|
     data << {:id => 12}
+}                                   
+```
+
+```json
+{
+    "data": [{
+        "id": 12
+    }]
+}
+```
+
+```ruby
+.data_hash { |data|
+    data[:id] => 12
 }                                   
 ```
 
@@ -102,7 +129,7 @@ and finally get JSON with
 Builder chain
 
 ```ruby
-Fson::Response.fail.data {|data| data << {:id => 12}}.add_error('not authorized').as_json
+Fson::Response.fail.data_array {|data| data << {:id => 12}}.add_error('not authorized').as_json
 ```
     
 will return
@@ -142,6 +169,7 @@ _response                   # returns response hash
 _errors                     # returns errors hash
 _data                       # returns data hash
 _initialized_data_array     # returns existing data array or initializes it with empty array
+_initialized_data_hash      # returns existing data hash or initializes it with empty hash
 ```
 
 For example you can add builder
@@ -163,7 +191,9 @@ by registering it in initializer
 ```ruby
 require 'fson/loader'
 
-::Fson::Loader::configure([MyCustomBuilder])
+ActionDispatch::Callbacks.to_prepare do
+  ::Fson::Loader::configure([MyCustomBuilder])
+end
 ```
     
 ## Contributing

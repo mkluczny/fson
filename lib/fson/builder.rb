@@ -5,15 +5,12 @@ module Fson
     # Builder Methods
     ##
 
-    def data(data = nil, &block)
-      _initialized_data_array
+    def data_hash(data = nil, &block)
+      data(data, Hash, &block)
+    end
 
-      if data and data.is_a?(Array)
-        @_data = data
-      end
-
-      yield(_initialized_data_array()) if block_given?
-      self
+    def data_array(data = nil, &block)
+      data(data, Array, &block)
     end
 
     def status(status)
@@ -52,6 +49,18 @@ module Fson
 
     private
 
+    def data(data = nil, type = nil, &block)
+      self.send("_initialized_data_#{type.to_s.downcase}")
+
+      if data
+        raise 'Invalid Argument Error' unless data.is_a?(type)
+        @_data = data
+      end
+
+      yield(@_data) if block_given?
+      self
+    end
+
     def _data
       @_data
     end
@@ -65,7 +74,19 @@ module Fson
     end
 
     def _initialized_data_array
+      if @_data.is_a?(Hash)
+        raise 'Invalid State Error: response data already initialized as a Hash'
+      end
+
       @_data ||= []
+    end
+
+    def _initialized_data_hash
+      if @_data.is_a?(Array)
+        raise 'Invalid State Error: response data already initialized as an Array'
+      end
+
+      @_data ||= {}
     end
   end
 end
